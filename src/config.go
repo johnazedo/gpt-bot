@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-const OnStartMessage = "Pergunte algo para o ChatGPT."
+const OnStartMessage = "Pergunte algo para mim."
 const MessagePrefix = "ChatGPT"
 
 type Config struct {
