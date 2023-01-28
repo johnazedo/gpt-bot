@@ -1,7 +1,6 @@
 package src
 
 import (
-	"fmt"
 	tele "gopkg.in/telebot.v3"
 )
 
@@ -17,7 +16,5 @@ func (h *GPTHandle) AskGPT(c tele.Context) error {
 	if err != nil {
 		return err
 	}
-
-	result := fmt.Sprintf("%s: %s", MessagePrefix, resp.Choices[0].Text)
-	return c.Send(result)
+	return c.Send(resp.Choices[0].Text)
 }
