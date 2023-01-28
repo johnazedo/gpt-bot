@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-const OnStartMessage = "Pergunte algo para mim."
+const OnStartMessage = "Ask me something."
 const MessagePrefix = "ChatGPT"
 
 type Config struct {
@@ -19,9 +19,9 @@ type Config struct {
 }
 
 var DefaultConfig = &Config{
-	GPTModel:          "text-babbage-001",
-	GPTTemperature:    0.5,
-	GPTMaxTokens:      512,
+	GPTModel:          "text-davinci-003",
+	GPTTemperature:    0.9,
+	GPTMaxTokens:      256,
 	GPTCompletionsUrl: "https://api.openai.com/v1/completions",
 }
 
