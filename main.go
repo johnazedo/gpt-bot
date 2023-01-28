@@ -1,14 +1,18 @@
 package main
 
 import (
+	"github.com/johnazedo/gpt-bot/src"
+	"github.com/joho/godotenv"
+	tele "gopkg.in/telebot.v3"
 	"log"
 	"os"
 	"time"
-
-	tele "gopkg.in/telebot.v3"
 )
 
 func main() {
+	_ = godotenv.Load()
+	handle := src.GPTHandle{}
+
 	pref := tele.Settings{
 		Token:  os.Getenv("TELEGRAM_KEY"),
 		Poller: &tele.LongPoller{Timeout: 10 * time.Second},
@@ -19,13 +23,9 @@ func main() {
 		log.Fatal(err)
 		return
 	}
-	b.Handle("/start", func(c tele.Context) error {
-		return c.Send("Pergunte algo para o ChatGPT.")
-	})
 
-	b.Handle("/hello", func(c tele.Context) error {
-		return c.Send("Hello!")
-	})
+	b.Handle("/start", src.OnStart)
+	b.Handle(tele.OnText, handle.AskGPT)
 
 	b.Start()
 }
