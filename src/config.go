@@ -13,14 +13,14 @@ const MessagePrefix = "ChatGPT"
 
 type Config struct {
 	GPTModel          string
-	GPTTemperature    int
+	GPTTemperature    float32
 	GPTMaxTokens      int
 	GPTCompletionsUrl string
 }
 
 var DefaultConfig = &Config{
 	GPTModel:          "text-babbage-001",
-	GPTTemperature:    0,
+	GPTTemperature:    0.5,
 	GPTMaxTokens:      512,
 	GPTCompletionsUrl: "https://api.openai.com/v1/completions",
 }
