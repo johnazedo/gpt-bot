@@ -1,4 +1,4 @@
-package src
+package domain
 
 type TextRequest struct {
 	Model       string  `json:"model"`
