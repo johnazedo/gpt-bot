@@ -1,3 +1,3 @@
-package src
+package domain
 
 type GetGPTAnswerUseCase struct{}

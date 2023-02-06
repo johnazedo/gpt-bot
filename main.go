@@ -1,7 +1,9 @@
 package main
 
 import (
-	"github.com/johnazedo/gpt-bot/src"
+	"github.com/johnazedo/gpt-bot/src/config"
+	"github.com/johnazedo/gpt-bot/src/controllers"
+	"github.com/johnazedo/gpt-bot/src/infra"
 	"github.com/joho/godotenv"
 	tele "gopkg.in/telebot.v3"
 	"log"
@@ -11,7 +13,14 @@ import (
 
 func main() {
 	_ = godotenv.Load()
-	handle := src.GPTHandle{}
+	gpt := controllers.Handle{
+		Repository: &infra.GPTRepository{
+			Config: config.DefaultGPTConfig,
+			Service: &infra.ApiServiceImpl{
+				ApiKey: os.Getenv("CHATGPT_KEY"),
+			},
+		},
+	}
 
 	pref := tele.Settings{
 		Token:  os.Getenv("TELEGRAM_KEY"),
@@ -24,8 +33,8 @@ func main() {
 		return
 	}
 
-	b.Handle("/start", src.OnStart)
-	b.Handle(tele.OnText, handle.AskGPT)
+	b.Handle("/start", controllers.OnStart)
+	b.Handle(tele.OnText, gpt.Ask)
 
 	b.Start()
 }
